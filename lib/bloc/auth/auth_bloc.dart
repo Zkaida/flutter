@@ -34,5 +34,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await authRemoteResource.logout();
       emit(const AuthUnauthenticated());
     });
+    on<AuthSessionExpired>((event, emit) {
+      emit(const AuthUnauthenticated());
+    });
   }
 }

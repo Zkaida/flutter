@@ -1,5 +1,5 @@
 class AppConfig {
-  static const String BASE_URL = 'http://127.0.0.1:8000';
+  static const String BASE_URL = 'http://10.66.229.83:8000';
   static const String API_PATH = '$BASE_URL/api/';
   static const String STORAGE_PATH = '$BASE_URL/storage/';
   static const String STORAGE_IMAGE = STORAGE_PATH;

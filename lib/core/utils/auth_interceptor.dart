@@ -21,9 +21,13 @@ class AuthInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    if (err.response?.statusCode == 401) {
+    final path = err.requestOptions.uri.path;
+    final isAuthEndpoint =
+        path.endsWith('/customer/login') || path.endsWith('/customer/logout');
+
+    if (err.response?.statusCode == 401 && !isAuthEndpoint) {
       await AuthLocalResource.deleteToken();
-      authBloc.add(const AuthLogoutRequested());
+      authBloc.add(const AuthSessionExpired());
     }
     super.onError(err, handler);
   }
